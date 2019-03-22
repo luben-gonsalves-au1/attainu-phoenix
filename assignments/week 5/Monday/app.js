@@ -53,7 +53,7 @@ var validate = () => {
   var input = document.getElementById("inputText").value;
 
   //   to check if the answer is correct or wrong
-  if ((data[x]["answer"] = input)) {
+  if (input == data[x]["answer"]) {
     alert("correct answer");
     document.getElementById("submit").setAttribute("disabled", "true");
     clearInterval(timer);
