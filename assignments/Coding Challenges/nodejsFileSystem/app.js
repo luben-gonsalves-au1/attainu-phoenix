@@ -9,4 +9,4 @@ var messageWrite = (file, message, n) => {
   });
 };
 
-messageWrite("hello.txt", "Welcome to AttainU ", 50);
+messageWrite("hello.txt", "Welcome to AttainU\n", 50);
