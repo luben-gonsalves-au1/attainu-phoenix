@@ -5,7 +5,7 @@ var pattern = n => {
   for (var i = 1; i <= n; i++) {
     console.log(pattern.repeat(i));
   }
-  for (var j = 5; j >= 1; j--) {
+  for (var j = n; j >= 1; j--) {
     console.log(pattern.repeat(j));
   }
 };
