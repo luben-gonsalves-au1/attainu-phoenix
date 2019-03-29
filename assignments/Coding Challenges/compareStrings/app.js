@@ -36,4 +36,4 @@ var compareString = (string1, string2) => {
   }
 };
 
-console.log(compareString("lubenFagnk", "lubenFran"));
+console.log(compareString("luben", "lubenFrank"));
