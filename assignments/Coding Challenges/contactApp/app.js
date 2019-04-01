@@ -8,10 +8,18 @@ var bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var contacts = [];
+var newContact = [
+  {
+    name: "luben",
+    number: "1237822189"
+  }
+];
 
 app.get("/", (req, res) => {
-  res.render("index.hbs", contacts);
+  var data = {
+    contact: newContact
+  };
+  res.render("index.hbs", data);
 });
 
 app.post("/", (req, res) => {
@@ -21,8 +29,7 @@ app.post("/", (req, res) => {
     name: name,
     number: number
   };
-  contacts.push(data);
-  console.log(contacts);
+  newContact.push(data);
   res.redirect("/");
 });
 
