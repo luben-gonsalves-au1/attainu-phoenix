@@ -27,7 +27,7 @@ app.get("/user", (req, res) => {
   res.send("login successful");
 });
 
-app.post("/add", (req, res) => {
+app.post("/login", (req, res) => {
   var name = req.body.name;
   var password = req.body.password;
   for (var i in userDb) {
@@ -39,6 +39,6 @@ app.post("/add", (req, res) => {
   res.redirect("/");
 });
 
-app.listen(3000, () => {
+app.listen(3000, () => { 
   console.log("app has been started at port 3000");
 });
