@@ -24,24 +24,26 @@ mongoClient.connect(function(error) {
 });
 
 var booksData = [];
+languages = [];
 
 app.get("/", (req, res) => {
   var data = {
-    books: booksData
+    books: booksData,
+    languages: languages
   };
   res.render("index.hbs", data);
 });
 
 app.post("/", (req, res) => {
-  // to search for a book
+  // to get all the books data from our db
   DB.collection("books")
     .find({})
     .toArray(function(error, books) {
       if (error) {
-        console.log("error occured while connecting to book collection");
+        console.log("error occurred while connecting to book collection");
       }
       booksData.length = 0;
-      //   loop through books data
+      //   loop through books data for a particular language
       for (i = 0; i < books.length; i++) {
         if (books[i].language == req.body.input) {
           booksData.push(books[i]);

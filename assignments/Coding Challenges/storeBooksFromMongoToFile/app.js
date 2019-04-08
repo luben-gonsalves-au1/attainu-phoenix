@@ -20,7 +20,6 @@ mongoClient.connect(err => {
       .toArray((err, books) => {
         if (err) throw err;
         var sData = JSON.stringify(books);
-
         // Store the books data to file
         fs.writeFile("books.json", sData, "utf8", err => {
           if (err) throw err;
