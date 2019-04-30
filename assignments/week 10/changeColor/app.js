@@ -5,22 +5,23 @@ var fastButton = document.getElementById("fast");
 var body = document.getElementById("body");
 
 var sec = 5000;
+var interval;
+
+var start = () => {
+  interval = setInterval(changeColor, sec);
+};
 
 slowButton.addEventListener("click", () => {
   sec = sec + 1000;
-  changeBackground();
+  clearInterval(interval);
+  interval = setInterval(changeColor, sec);
 });
 
 fastButton.addEventListener("click", () => {
   sec = sec - 1000;
-  changeBackground();
+  clearInterval(interval);
+  interval = setInterval(changeColor, sec);
 });
-
-var changeBackground = () => {
-  setInterval(function() {
-    changeColor();
-  }, sec);
-};
 
 var changeColor = () => {
   console.log(body.style.background);
@@ -31,3 +32,5 @@ var changeColor = () => {
     body.style.background = "red";
   }
 };
+
+start();
