@@ -1,14 +1,15 @@
+//imperative way
 var numbers = [4, 28, 43, 34, 37, 41, 26, 49, 33, 19, 36, 25, 47, 20, 1, 45, 6, 5, 27, 48];
 
-var evenSqaures=[];
+var evenSquares=[];
 
 for(var i=0;i<numbers.length;i++){
   if(numbers[i]%2==0){
-    evenSqaures.push(numbers[i]*numbers[i])
+    evenSquares.push(numbers[i]*numbers[i])
   }
 }
 
-console.log(evenSqaures)
+console.log(evenSquares)
 
 
 //functional way
