@@ -23,3 +23,18 @@ console.log(f)
 var g=[13,14,15,16]
 var h=g.reduceRight((a,b)=>a+b);
 console.log(h)
+
+//indexOf
+//returns the first occurance value in the string
+var str="luben"
+var m=str.indexOf("e");
+//returns 3
+console.log(m);
+
+
+//lastIndexOf
+//return the positio of last occurance specified value
+var string="hello, hi how are you, hello i am good"
+var n=string.lastIndexOf("hello");
+console.log(n);
+
