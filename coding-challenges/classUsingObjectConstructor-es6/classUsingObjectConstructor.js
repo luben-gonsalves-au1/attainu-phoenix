@@ -2,22 +2,22 @@
 
 class MyArray {
   constructor(...num) {
-    this.number = new Set(num);
+    this.mySet = new Set(num);
   }
 
   print() {
-    this.number.forEach(element => {
+    this.mySet.forEach(element => {
       console.log(element);
     });
-  };
+  }
 
   search(elem) {
-    console.log(this.number.has(elem));
-  };
+    console.log(this.mySet.has(elem));
+  }
 }
 
 var arr = new MyArray(1, 2, 3, 4, 5, 6);
 
 arr.print();
-console.log("search==>")
+console.log("search==>");
 arr.search(2);
