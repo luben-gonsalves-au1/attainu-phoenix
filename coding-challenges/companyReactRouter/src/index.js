@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Iframe from "react-iframe";
 
 class Package1 extends React.Component {
   render() {
@@ -14,8 +15,8 @@ class Package1 extends React.Component {
           className="img-thumbnail"
         />
         <h3 className="offset-3">
-          Goa <small className="text-muted"> 10, 000 Rs </small>{" "}
-        </h3>{" "}
+          Goa <small className="text-muted"> 10, 000 Rs </small>
+        </h3>
       </div>
     );
   }
@@ -32,8 +33,8 @@ class Package2 extends React.Component {
           className="img-thumbnail"
         />
         <h3 className="offset-1">
-          SriNagar <small className="text-muted"> 15, 000 Rs </small>{" "}
-        </h3>{" "}
+          SriNagar <small className="text-muted"> 15, 000 Rs </small>
+        </h3>
       </div>
     );
   }
@@ -50,8 +51,8 @@ class Package3 extends React.Component {
           className="img-thumbnail"
         />
         <h3 className="offset-1">
-          Andaman <small className="text-muted"> 25, 000 Rs </small>{" "}
-        </h3>{" "}
+          Andaman <small className="text-muted"> 25, 000 Rs </small>
+        </h3>
       </div>
     );
   }
@@ -68,8 +69,8 @@ class Package4 extends React.Component {
           className="img-thumbnail"
         />
         <h3>
-          Leh - ladakh <small className="text-muted"> 30, 000 Rs </small>{" "}
-        </h3>{" "}
+          Leh - ladakh <small className="text-muted"> 30, 000 Rs </small>
+        </h3>
       </div>
     );
   }
@@ -87,7 +88,7 @@ class Heading extends React.Component {
           <Package2 />
           <Package3 />
           <Package4 />
-        </div>{" "}
+        </div>
       </div>
     );
   }
@@ -96,30 +97,108 @@ class Heading extends React.Component {
 class Navbar extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                Home <span className="sr-only"> (current) </span>{" "}
-              </a>{" "}
-            </li>{" "}
-          </ul>{" "}
-        </div>{" "}
-      </nav>
+      <Router>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item active">
+                <Link className="nav-link" to="/">
+                  Home <span className="sr-only"> (current) </span>
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="aboutUs">
+                  About Us
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="contactUs">
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <Route path="/" exact={true} component={Home} />
+        <Route path="/aboutUs" component={AboutUs} />
+        <Route path="/contactUs" component={ContactUs} />
+      </Router>
     );
   }
 }
 
-class App extends React.Component {
+class ContactUs extends React.Component {
+  render() {
+    return (
+      <div className="container">
+        <br />
+        <h1 className="offset-5">Contact US</h1>
+        <hr />
+        <br />
+        <br />
+        <pre>Mytrip,#361,first floor, Surathkal,krishnapura,</pre>
+        <Iframe
+          className="iframe"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.687945090296!2d74.79151731388335!3d12.991799990842598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba351f73884a797%3A0x6528408a37903649!2sKrec+Nitk!5e0!3m2!1sen!2sin!4v1551944375456"
+          width="1000"
+          height="450"
+          frameborder="0"
+          style="border:0"
+          allowfullscreen
+        />
+      </div>
+    );
+  }
+}
+
+class AboutUs extends React.Component {
+  render() {
+    return (
+      <div className="container">
+        <br />
+        <h1 className="offset-5">About US</h1>
+        <hr />
+        <br />
+        <br />
+        <div className="row">
+          <div className="col-6">
+            <h4 className="offset-3">CEO-John</h4>
+            <p className="offset-3">Ex Google,Traveller</p>
+            <br />
+            <h4 className="offset-3">CTO-Drake</h4>
+            <p className="offset-3">Full stack developer(MERN)</p>
+            <br />
+            <h4 className="offset-3">Technical Head-Katie</h4>
+            <p className="offset-3">Technical Assistant</p>
+          </div>
+
+          <div className="col-6">
+            <div className="offset-4">
+              <img src="ceo.png" className="img-circle" alt="Cinque Terre" />
+              <br />
+              <img src="cto.png" className="img-circle" alt="Cinque Terre" />
+              <br />
+              <img
+                src="technicalassistant.png"
+                className="img-circle"
+                alt="Cinque Terre"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class Home extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
         <Heading />
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Navbar />, document.getElementById("root"));
