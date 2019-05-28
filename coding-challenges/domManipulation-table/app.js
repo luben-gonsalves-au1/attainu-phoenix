@@ -54,6 +54,7 @@ tableTag.appendChild(tbodyTag);
 // loop over numbers and sqaures
 for (var i = 1; i <= 10; i++) {
   var trTag = document.createElement("tr");
+
   tbodyTag.appendChild(trTag);
 
   var td1Tag = document.createElement("td");

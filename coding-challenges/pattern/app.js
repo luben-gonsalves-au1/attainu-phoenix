@@ -18,14 +18,7 @@ var pattern = n => {
     pattern += "*";
     console.log(pattern);
   }
-
-  for (var j = n; j >= 1; j--) {
-    var number = j;
-    pattern = "";
-    while (number >= 1) {
-      pattern += "*";
-      number--;
-    }
+ for( var i=n-1;i>=1;i--){
     console.log(pattern);
   }
 };
