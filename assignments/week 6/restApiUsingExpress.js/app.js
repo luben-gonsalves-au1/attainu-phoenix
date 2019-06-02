@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post("/add", (request, response) => {
   var number1 = request.body.num1;
   var number2 = request.body.num2;
+
   var sum = parseInt(number1) + parseInt(number2);
   var data = {
     num1: number1,
@@ -19,41 +20,41 @@ app.post("/add", (request, response) => {
   response.json(data);
 });
 
-app.post("/sub", (request, response) => {
-  var number1 = request.body.num1;
-  var number2 = request.body.num2;
-  var sum = parseInt(number1) - parseInt(number2);
-  var data = {
-    num1: number1,
-    num2: number2,
-    result: sum
-  };
-  response.json(data);
-});
+// app.post("/sub", (request, response) => {
+//   var number1 = request.body.num1;
+//   var number2 = request.body.num2;
+//   var sum = parseInt(number1) - parseInt(number2);
+//   var data = {
+//     num1: number1,
+//     num2: number2,
+//     result: sum
+//   };
+//   response.json(data);
+// });
 
-app.post("/mul", (request, response) => {
-  var number1 = request.body.num1;
-  var number2 = request.body.num2;
-  var sum = parseInt(number1) * parseInt(number2);
-  var data = {
-    num1: number1,
-    num2: number2,
-    result: sum
-  };
-  response.json(data);
-});
+// app.post("/mul", (request, response) => {
+//   var number1 = request.body.num1;
+//   var number2 = request.body.num2;
+//   var sum = parseInt(number1) * parseInt(number2);
+//   var data = {
+//     num1: number1,
+//     num2: number2,
+//     result: sum
+//   };
+//   response.json(data);
+// });
 
-app.post("/div", (request, response) => {
-  var number1 = request.body.num1;
-  var number2 = request.body.num2;
-  var sum = parseInt(number1) / parseInt(number2);
-  var data = {
-    num1: number1,
-    num2: number2,
-    result: sum
-  };
-  response.json(data);
-});
+// app.post("/div", (request, response) => {
+//   var number1 = request.body.num1;
+//   var number2 = request.body.num2;
+//   var sum = parseInt(number1) / parseInt(number2);
+//   var data = {
+//     num1: number1,
+//     num2: number2,
+//     result: sum
+//   };
+//   response.json(data);
+// });
 
 app.listen(3000, () => {
   console.log("app has been started");
