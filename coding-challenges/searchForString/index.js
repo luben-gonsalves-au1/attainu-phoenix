@@ -8,10 +8,10 @@ function searchFile(file, string) {
     var arr = data.split("\n");
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].includes(string)) {
-        console.log(`${string} is found at line ${i + 1}`);
-        break;
+        return console.log(`${string} is found at line ${i + 1}`);
       }
     }
+    console.log("String didn't match");
   });
 }
 
