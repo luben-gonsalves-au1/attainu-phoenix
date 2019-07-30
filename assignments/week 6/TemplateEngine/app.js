@@ -23,7 +23,7 @@ app.get("/players", function(request, response) {
     players: playersData,
     userName: "Luben"
   };
-  response.render("players.hbs", data);
+  respons.render("players.hbs", data);
 });
 
 app.post("/players", function(request, response) {

@@ -34,7 +34,7 @@ var closureFunc = () => {
   return counterFunc;
 };
 
-var counterFunc = closureFunc();
+var counter = closureFunc();
 
 globalButton.addEventListener("click", globalFunc);
 objectButton.addEventListener("click", objectFunc);
