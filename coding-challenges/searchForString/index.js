@@ -15,4 +15,12 @@ function searchFile(file, string) {
   });
 }
 
-searchFile("searchMe.txt", "luben");
+function main() {
+	if(process.argv.length !== 4) {
+		return console.log("Enter the filename and searchstring");
+	} else {
+		searchFile(process.argv[2], process.argv[3]);
+	}
+}
+
+main();
