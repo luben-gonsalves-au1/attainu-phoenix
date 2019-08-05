@@ -5,28 +5,30 @@ var fs = require("fs");
 function csvRead(file) {
   fs.readFile(file, "utf8", (err, data) => {
     if (err) throw err;
+    var swaps;
     var array = data.split("\n");
-    var str1 = array[0].split(",")[1];
-    console.log(str1);
 
     const swap = (arr, indx1, indx2) => {
-      [arr[indx1], arr[indx2]] = [arr[indx2], arr[indx1]];
+      var temp = arr[indx1];
+      arr[indx1] = arr[indx2];
+      arr[indx2] = temp;
     };
-    var noSwaps;
 
     for (let i = array.length - 1; i > 0; i--) {
-      noSwaps = false;
+      swaps = false;
       for (let j = 0; j < i; j++) {
-        if (arr[j] > arr[j + 1]) {
-          swap(arr, j, j + 1);
-          noSwaps = true;
+        var num1 = array[j].split(",")[1];
+        var num2 = array[j + 1].split(",")[1];
+        if (num1 < num2) {
+          swap(array, j, j + 1);
+          swaps = true;
         }
       }
-      if (!noSwaps) {
+      if (!swaps) {
         break;
       }
     }
-    return arr;
+    console.log(array);
   });
 }
 
