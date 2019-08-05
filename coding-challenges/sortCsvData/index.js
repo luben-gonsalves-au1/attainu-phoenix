@@ -28,7 +28,7 @@ function csvRead(file) {
         break;
       }
     }
-    console.log(array);
+    console.log(array.join("\n"));
   });
 }
 
