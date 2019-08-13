@@ -1,139 +1,119 @@
-// External packages
+"use strict";
+
+// Include all the packages/modules we need.
 var express = require("express");
-var mongoDb = require("mongodb");
+var mongo = require("mongodb");
 var bodyParser = require("body-parser");
 
-// express application
+// Create the app
 var app = express();
 
-// use body-parser
+// App configurations and settings.
+app.set("view engine", "hbs");
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// using handlebars as view engine
-app.set("view engine", "hbs");
-
-// The db connection
+// Create the DB connection
 var DB;
 
-var mongoClient = new mongoDb.MongoClient("mongodb://localhost:27017/users", {
+// Create a Mongo client
+var mongoClient = new mongo.MongoClient("mongodb://localhost:27017/attainu", {
   useNewUrlParser: true
 });
-
-mongoClient.connect(err => {
-  if (err) console.log("Error connecting to MongoDb");
-  else {
-    console.log("Connected to mongoDb database");
+mongoClient.connect(function(error) {
+  if (error) {
+    console.log("Error connecting to the database.");
+  } else {
+    console.log("DB connection established.");
+    DB = mongoClient.db("attainu");
   }
-  DB = mongoClient.db("users");
 });
 
-// Get Methods
-// signup route-get request
-app.get("/signUp", (req, res) => {
-  var failed = req.query.failed;
-  var emailTaken = req.query.emailTaken;
-
-  //   if signUp fails  set the flag to true
-  if (failed == "true") {
-    var data = {
-      failed: true
-    };
-    return res.render("signUp.hbs", data);
-  }
-
-  //   if mail is taken set the flag to true
-  if (emailTaken == "true") {
-    var data = {
-      emailTaken: true
-    };
-    return res.render("signUp.hbs", data);
-  }
-
-  res.render("signUp.hbs");
+// App routes (URLs)
+app.get("/", function(request, response) {
+  response.render("index.hbs");
 });
 
-//login route->get Request
-app.get("/login", (req, res) => {
-  var success = req.query.success;
-  var wrongCred = req.query.wrongCred;
+app.get("/instructors", function(request, response) {
+  DB.collection("instructors")
+    .find({})
+    .toArray(function(error, instructors) {
+      if (error) {
+        console.log("error occured while connecting to instructors collection");
+      }
 
-  //   if credentials are true  set the flag to true
-  if (success == "true") {
-    var data = {
-      success: true
-    };
-    return res.render("login.hbs", data);
-  }
-
-  //   if wrong credentials  set the flag to true
-  if (wrongCred == "true") {
-    var data = {
-      wrongCred: true
-    };
-    console.log("entered wrongCredentials");
-    return res.render("login.hbs", data);
-  }
-  res.render("login.hbs");
+      var data = {
+        instructors: instructors
+      };
+      response.render("instructors.hbs", data);
+    });
 });
 
-// Post Methods
-//signUp route-->Post method
-app.post("/signUp", (req, res) => {
-  var name = req.body.name;
-  var email = req.body.email;
-  var password = req.body.password;
+app.get("/instructors/add", function(request, response) {
+  response.render("instructors-add.hbs");
+});
 
-  var userData = {
+app.post("/instructors/add", function(request, response) {
+  var name = request.body.name;
+  var phone = request.body.phone;
+
+  var newInstructor = {
     name: name,
-    email: email,
-    password: password
+    phone: phone
   };
 
-  DB.collection("credentials")
+  DB.collection("instructors").insertOne(newInstructor, function(
+    error,
+    result
+  ) {
+    if (error) {
+      console.log(
+        "error occured while inserting data into the instructors collection"
+      );
+    }
+
+    response.redirect("/instructors");
+  });
+});
+
+app.get("/students", function(request, response) {
+  DB.collection("students")
     .find({})
-    .toArray((err, data) => {
-      if (err) {
-        console.log("couldnt fetch the data");
-      } else {
-        //to check if the mail exists
-        for (i = 0; i < data.length; i++) {
-          if (email == data[i].email) {
-            return res.redirect("/signUp/?emailTaken=true");
-          }
-        }
-        //if the mail doesnt exists insert data into db
-        DB.collection("credentials").insertOne(userData, (err, result) => {
-          if (err) {
-            console.log("sign up failed");
-            return res.redirect("/SignUp/?failed=true");
-          } else {
-            console.log("SignUp successful");
-            return res.redirect("/login/?success=true");
-          }
-        });
+    .toArray(function(error, students) {
+      if (error) {
+        console.log("error occured while connecting to students collection");
       }
+
+      var data = {
+        students: students
+      };
+      response.render("students.hbs", data);
     });
 });
 
-//login route->post method
-app.post("/login", (req, res) => {
-  var email = req.body.email;
-  var password = req.body.password;
-  //   insert login data into mongodb
-  DB.collection("credentials")
-    .find({})
-    .toArray((err, data) => {
-      if (err) {
-        console.log("couldnt fetch the data");
-      } else {
-        for (i = 0; i < data.length; i++) {
-          if (email == data[i].email && password == data[i].password) {
-            return res.send("Login successful");
-          }
-        }
-        return res.redirect("/login/?wrongCred=true");
-      }
-    });
+app.get("/students/add", function(request, response) {
+  response.render("students-add.hbs");
+});
+
+app.post("/students/add", function(request, response) {
+  var name = request.body.name;
+  var phone = request.body.phone;
+  var batch = request.body.batch;
+
+  var newStundent = {
+    name: name,
+    phone: phone,
+    batch: batch
+  };
+
+  DB.collection("students").insertOne(newStudent, function(error, result) {
+    if (error) {
+      console.log(
+        "error occured while inserting data into the students collection"
+      );
+    }
+
+    response.redirect("/students");
+  });
 });
 
 app.listen(3000, () => {
