@@ -1,33 +1,23 @@
-function quickSort(array) {
-  if (array.length <= 1) return array;
-  let left = [],
-    right = [],
-    pivot = array.shift(),
-    center = [pivot];
-
-  while (array.length) {
-    let currentElement = array.shift();
-    if (currentElement == pivot) {
-      center.push(pivot);
-    } else if (currentElement < pivot) {
-      left.push(currentElement);
-    } else {
-      right.push(currentElement);
-    }
-  }
-  let sortedLeft = quickSort(left);
-  let sortedRight = quickSort(right);
-
-  return sortedLeft.concat(center, sortedRight);
+function merge(array1, array2) {
+	let merge = [];
+	
+	while(array1.length && array2.length) {
+		let smallest;
+		if(array1[0] < array2[0]) {
+		  smallest = array1.shift();
+		} else {
+		  smallest = array2.shift();
+		}
+		merge.push(smallest);
+	}
+	
+	if(array1.length) {
+		merge.concat(array1);
+	}
+	if(array2.length) {
+		merge.concat(array2)
+	}
+	return merge
 }
 
-function concatArray(array1, array2) {
-  for (let i = 0; i < array2.length; i++) {
-    array1.push(array2[i]);
-  }
-
-  let sortedArray = quickSort(array1);
-  return sortedArray;
-}
-
-console.log(concatArray([1, 3, 5, 7], [2, 4, 5, 6]));
+console.log(merge([1, 3, 5, 7], [2, 4, 5, 6]));

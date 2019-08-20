@@ -9,9 +9,8 @@ function characterCounter(str) {
   }
   result = "";
   for (let elem in obj) {
-    result += elem + obj[elem];
+    result += elem;
+	obj[elem] == 1? '': result += obj[elem];
   }
   console.log(result);
 }
-
-characterCounter("AAABCCDDDD");
