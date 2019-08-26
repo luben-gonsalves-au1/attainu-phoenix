@@ -1,17 +1,13 @@
-function checkPallindrome(string) {
+const readline = require("readline").createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+readline.question(`Enter the string: \n`, string => {
   let result = "";
   for (let i = string.length - 1; i >= 0; i--) {
     result += string[i];
   }
-  return result === string;
-}
-
-function main() {
-  if (process.argv.length !== 3) {
-    return console.log("Enter the string");
-  } else {
-    return checkPallindrome(process.argv[2]);
-  }
-}
-
-console.log(main());
+  console.log(result == string);
+  readline.close();
+});
