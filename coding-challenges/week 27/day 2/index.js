@@ -7,7 +7,7 @@ function permutation(array, k = array.length) {
       if (k % 2 == 0) {
         [array[i], array[k - 1]] = [array[k - 1], array[i]];
       } else {
-        [array[0], array[k - 1]] = [array[0], array[k - 1]];
+        [array[0], array[k - 1]] = [array[k - 1], array[0]];
       }
       permutation(array, k - 1);
     }
